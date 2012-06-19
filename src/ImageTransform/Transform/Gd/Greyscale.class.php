@@ -1,26 +1,30 @@
 <?php
-/*
- * This file is part of the sfImageTransform package.
- * (c) 2007 Stuart Lowes <stuart.lowes@gmail.com>
+
+/**
+ * This file is part of the Image Transform Library.
+ * (c) 2012 Javier Neyra 
+ * 
+ * Based on sfImageTransform from Stuart Lowes <stuart.lowes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+namespace ImageTransform\Transform\Gd;
+
 /**
  *
- * sfImageGreyscaleGF class.
+ * Greyscale class.
  *
  * Greyscales a GD image.
  *
  * Reduces the level of detail of an image.
  *
- * @package sfImageTransform
+ * @package ImageTransform
  * @subpackage transforms
- * @author Stuart Lowes <stuart.lowes@gmail.com>
- * @version SVN: $Id$
+ * @author Javier Neyra
  */
-class sfImageGreyscaleGD extends sfImageTransformAbstract
+class Greyscale extends \ImageTransform\Transform
 {
   /**
    * Apply the transform to the sfImage object.
@@ -28,7 +32,7 @@ class sfImageGreyscaleGD extends sfImageTransformAbstract
    * @param sfImage
    * @return sfImage
    */
-  protected function transform(sfImage $image)
+  protected function transform(\ImageTransform\Image $image)
   {
     $resource = $image->getAdapter()->getHolder();
 
@@ -42,7 +46,7 @@ class sfImageGreyscaleGD extends sfImageTransformAbstract
 
     else
     {
-      throw new sfImageTransformException(sprintf('Cannot perform transform, GD does not support imagefilter '));
+      throw new \ImageTransform\Exception(sprintf('Cannot perform transform, GD does not support imagefilter '));
     }
 
     return $image;

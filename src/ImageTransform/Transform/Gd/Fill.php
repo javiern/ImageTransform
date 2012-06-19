@@ -42,11 +42,11 @@ class Fill extends \ImageTransform\Transform
   protected $fill = null;
 
   /**
-   * Construct an sfImageDuotone object.
+   * Constructor
    *
    * @param integer
    * @param integer
-   * @param string/object hex color or sfImage object
+   * @param string/\ImageTransform\Image hex color or \ImageTransform\Image object
    */
   public function __construct($x=0, $y=0, $fill='#000000')
   {
@@ -114,12 +114,12 @@ class Fill extends \ImageTransform\Transform
   /**
    * Sets the fill
    *
-   * @param mixed
+   * @param string/\ImageTransform\Image hex color or \ImageTransform\Image object
    * @return boolean
    */
   public function setFill($fill)
   {
-    if ((is_object($fill) && class_name($fill) === 'sfImage') || preg_match('/#[\d\w]{6}/',$fill))
+    if ($fill instanceof \ImageTransform\Image || preg_match('/#[\d\w]{6}/',$fill))
     {
       $this->fill = $fill;
 
@@ -140,16 +140,16 @@ class Fill extends \ImageTransform\Transform
   }
 
   /**
-   * Apply the transform to the sfImage object.
+   * Apply the transform to the \ImageTransform\Image object.
    *
-   * @param sfImage
-   * @return sfImage
+   * @param \ImageTransform\Image
+   * @return \ImageTransform\Image
    */
   protected function transform(\ImageTransform\Image $image)
   {
     $resource = $image->getAdapter()->getHolder();
 
-    if (is_object($this->fill))
+    if ($this->fill instanceof \ImageTransform\Image)
     {
       imagesettile($resource, $this->fill->getAdapter()->getHolder());
       imagefill($resource, $this->x, $this->y, IMG_COLOR_TILED);
