@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the Image Transform Library.
  * (c) 2012 Javier Neyra 
  * 
@@ -313,8 +313,8 @@ class Image
      */
     public function __call($name, $arguments)
     {
-        $class_generic = 'sfImage' . ucfirst($name) . 'Generic';
-        $class_adapter = 'sfImage' . ucfirst($name) . $this->getAdapter()->getAdapterName();
+        $class_generic = '\\ImageTransform\\Transform\\Generic\\' . ucfirst($name);
+        $class_adapter = '\\ImageTransform\\Transform\\' . $this->getAdapter()->getAdapterName() . '\\' . ucfirst($name);
 
         $class = null;
 
@@ -543,7 +543,7 @@ class Image
             $name = 'Gd';
         }
 
-        $adapter_class = '\\ImageTransform\\Adapter\\' . $name . 'Adapter';
+        $adapter_class = '\\ImageTransform\\Adapter\\' . $name;
 
         if (class_exists($adapter_class))
         {

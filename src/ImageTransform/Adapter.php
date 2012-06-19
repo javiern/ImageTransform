@@ -1,5 +1,6 @@
 <?php
-/*
+
+/**
  * This file is part of the Image Transform Library.
  * (c) 2012 Javier Neyra 
  * 

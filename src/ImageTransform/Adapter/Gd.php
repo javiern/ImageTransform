@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the Image Transform Library.
  * (c) 2012 Javier Neyra 
  * 
@@ -20,7 +20,7 @@ namespace ImageTransform\Adapter;
  * @subpackage Adapters
  * @author Javier Neyra
  */
-class GdAdapter extends \ImageTransform\Adapter
+class Gd extends \ImageTransform\Adapter
 {
     
     /**
@@ -347,7 +347,7 @@ class GdAdapter extends \ImageTransform\Adapter
      */
     public function getAdapterName()
     {
-        return 'GD';
+        return 'Gd';
     }
 
     /**

@@ -1,24 +1,27 @@
 <?php
-/*
- * This file is part of the sfImageTransform package.
- * (c) 2009 Stuart Lowes <stuart.lowes@gmail.com>
+
+/**
+ * This file is part of the Image Transform Library.
+ * (c) 2012 Javier Neyra 
+ * 
+ * Based on sfImageTransform from Stuart Lowes <stuart.lowes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace ImageTransform\Transform\Generic;
+
 /**
- * sfImageResizeGeneric class
+ * ImageTransform\Generic\Resize class
  *
  * generic resize transform
  *
- * @package sfImageTransform
+ * @package ImageTransform
  * @subpackage transforms
- * @author Stuart Lowes <stuart.lowes@gmail.com>
- * @author Miloslav Kmet <miloslav.kmet@gmail.com>
- * @author Victor Berchet <vberchet-sf@yahoo.com>
- * @version SVN: $Id$
+ * @author Javier Neyra
  */
-class sfImageResizeGeneric extends sfImageTransformAbstract
+class Resize extends \ImageTransform\Transform
 {
   /**
    * width of the target

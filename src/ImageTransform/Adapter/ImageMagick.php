@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the Image Transform Library.
  * (c) 2012 Javier Neyra 
  * 
@@ -22,7 +22,7 @@ namespace ImageTransform\Adapter;
  * @package sfImageTransform
  * @author Javier Neyra
  */
-class ImageMagickAdapter extends \ImageTransform\Adapter
+class ImageMagick extends \ImageTransform\Adapter
 {
 
     /**
