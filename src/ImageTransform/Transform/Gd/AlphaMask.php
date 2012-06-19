@@ -1,29 +1,31 @@
 <?php
+
 /**
- * This file is part of the sfImageTransformExtraPlugin package.
- * (c) 2010 Christian Schaefer <caefer@ical.ly>>
+ * This file is part of the Image Transform Library.
+ * (c) 2012 Javier Neyra 
+ * 
+ * Based on sfImageTransform from Stuart Lowes <stuart.lowes@gmail.com> 
+ * Transformation by Christian Schaefer <caefer@ical.ly>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
- * @package    sfImageTransformExtraPlugin
- * @author     Christian Schaefer <caefer@ical.ly>
- * @version    SVN: $Id: sfRawFileCache.class.php 63 2010-03-09 04:34:28Z caefer $
  */
+
+namespace ImageTransform\Transform\Gd;
 
 /**
  * Image transformation to apply a second image as an alpha mask to the first image
  *
- * @package    sfImageTransformExtraPlugin
+ * @package    ImageTransform\Transform\Gd
  * @subpackage transforms
- * @author     Christian Schaefer <caefer@ical.ly>
+ * @author     Javier Neyra
  */
-class sfImageAlphaMaskGD extends sfImageTransformAbstract
+class AlphaMask extends \ImageTransform\Transform
 {
   /**
-   * sfImage mask object
+   * ImageTransform\Image mask object
    * 
-   * @var sfImage
+   * @var ImageTransform\Image
    */
   protected $mask = null;
 
@@ -40,7 +42,7 @@ class sfImageAlphaMaskGD extends sfImageTransformAbstract
     $this->setColor($color);
   }
 
-  public function setMask(sfImage $mask)
+  public function setMask(\ImageTransform\Image $mask)
   {
     $this->mask = $mask;
 
@@ -69,7 +71,7 @@ class sfImageAlphaMaskGD extends sfImageTransformAbstract
     return $this->color;
   }
   
-  protected function transform(sfImage $image) 
+  protected function transform(\ImageTransform\Image $image) 
   {
 
     switch ($image->getMIMEType())
@@ -86,7 +88,7 @@ class sfImageAlphaMaskGD extends sfImageTransformAbstract
     return $image;
   }
 
-  private function transformAlpha(sfImage $image)
+  private function transformAlpha(\ImageTransform\Image $image)
   {
     $w = $image->getWidth();
     $h = $image->getHeight();
@@ -134,7 +136,7 @@ class sfImageAlphaMaskGD extends sfImageTransformAbstract
     imagedestroy($canvas);
   }
   
-  protected function transformDefault(sfImage $image)
+  protected function transformDefault(\ImageTransform\Image $image)
   {
     $w = $image->getWidth();
     $h = $image->getHeight();

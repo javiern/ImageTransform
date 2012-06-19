@@ -466,14 +466,14 @@ class Image
      */
     protected function autoDetectMIMETypeFromFile($filename)
     {
-        $settings = 'GD';
+        $settings['library'] = 'gd_mime_type';
 
         $support_libraries = array('fileinfo', 'mime_type', 'gd_mime_type');
 
-        if (false === $settings['auto_detect'])
-        {
-            return false;
-        }
+//        if (false === $settings['auto_detect'])
+//        {
+//            return false;
+//        }
 
         if (in_array(strtolower($settings['library']), $support_libraries) && '' !== $filename)
         {
