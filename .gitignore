@@ -1,0 +1,2 @@
+phpunit.xml
+test/ImageTransform/Test/images/testOutput/*

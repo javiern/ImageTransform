@@ -25,7 +25,7 @@ namespace ImageTransform\Transform\Gd;
  * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra
  */
-class Rectangle extends \ImageTransform\Image
+class Rectangle extends \ImageTransform\Transform
 {
 
     /**
@@ -335,7 +335,7 @@ class Rectangle extends \ImageTransform\Image
      * @param sfImage
      * @return sfImage
      */
-    protected function transform(sfImage $image)
+    protected function transform(\ImageTransform\Image $image)
     {
         $resource = $image->getAdapter()->getHolder();
 

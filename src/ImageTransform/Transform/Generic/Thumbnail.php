@@ -186,7 +186,7 @@ class Thumbnail extends \ImageTransform\Transform
     /**
      * Apply the transformation to the image and returns the image thumbnail
      */
-    protected function transform(sfImage $image)
+    protected function transform(\ImageTransform\Image $image)
     {
         $resource_w = $image->getWidth();
         $resource_h = $image->getHeight();

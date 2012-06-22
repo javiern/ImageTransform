@@ -177,7 +177,7 @@ class Resize extends \ImageTransform\Transform
   /**
    * Apply the transformation to the image and returns the resized image
    */
-  protected function transform(sfImage $image)
+  protected function transform(\ImageTransform\Image $image)
   {
     list($target_w, $target_h) = $this->computeTargetSize($image->getWidth(), $image->getHeight());
     

@@ -293,7 +293,7 @@ class Image
      * @return \ImageTransform\Image
      */
     public function __call($name, $arguments)
-    {
+    {   
         $class_generic = '\\ImageTransform\\Transform\\Generic\\' . ucfirst($name);
         $class_adapter = '\\ImageTransform\\Transform\\' . $this->getAdapter()->getAdapterName() . '\\' . ucfirst($name);
 
@@ -327,7 +327,7 @@ class Image
         {
             $transform = $reflectionObj->newInstance();
         }
-
+        
         $transform->execute($this);
 
         // Tidy up

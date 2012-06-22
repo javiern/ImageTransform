@@ -88,7 +88,7 @@ class Overlay extends \ImageTransform\Transform
      *
      * @param sfImage
      */
-    function setOverlay(sfImage $overlay)
+    function setOverlay(\ImageTransform\Image $overlay)
     {
         $this->overlay = $overlay;
     }
@@ -203,7 +203,7 @@ class Overlay extends \ImageTransform\Transform
      *
      * @return boolean
      */
-    public function computeCoordinates(sfImage $image)
+    public function computeCoordinates(\ImageTransform\Image $image)
     {
         $position = $this->getPosition();
 
@@ -281,7 +281,7 @@ class Overlay extends \ImageTransform\Transform
      * @param integer
      * @return sfImage
      */
-    protected function transform(sfImage $image)
+    protected function transform(\ImageTransform\Image $image)
     {
         // compute the named coordinates
         $this->computeCoordinates($image);
@@ -298,7 +298,7 @@ class Overlay extends \ImageTransform\Transform
         // Check we have a valid image resource
         if (false === $this->overlay->getAdapter()->getHolder())
         {
-            throw new sfImageTransformException(sprintf('Cannot perform transform: %s', get_class($this)));
+            throw new \ImageTransform\Exception(sprintf('Cannot perform transform: %s', get_class($this)));
         }
 
         // create true color overlay image:

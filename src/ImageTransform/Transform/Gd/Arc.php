@@ -399,7 +399,7 @@ class Arc extends \ImageTransform\Transform
      * @param object
      * @return object
      */
-    protected function transform(sfImage $image)
+    protected function transform(\ImageTransform\Image $image)
     {
         $resource = $image->getAdapter()->getHolder();
 
