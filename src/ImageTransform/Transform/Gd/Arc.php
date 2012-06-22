@@ -22,6 +22,7 @@ namespace ImageTransform\Transform\Gd;
  *
  * @package ImageTransform
  * @subpackage transforms
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier neyra
  */
 class Arc extends \ImageTransform\Transform

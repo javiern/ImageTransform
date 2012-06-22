@@ -14,67 +14,78 @@ namespace ImageTransform\Transform\Gd;
 
 /**
  *
- * Ellipse class.
+ * sfImageRectangleGD class.
  *
- * Draws an Ellipse.
+ * Draws a rectangle.
  *
- * Draws an Ellipse on an GD image.
+ * Draws a rectangle on a GD image.
  *
- * @package ImageTransform
+ * @package sfImageTransform
  * @subpackage transforms
  * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra
  */
-class Ellipse extends \ImageTransform\Transform
+class Rectangle extends \ImageTransform\Image
 {
 
     /**
-     * X-coordinate of the center.
+     * Start X coordinate.
+     *
      * @var integer
      */
-    protected $x = 0;
+    protected $x1 = 0;
 
     /**
-     * Y-coordinate of the center.
+     * Start Y coordinate.
+     *
      * @var integer
      */
-    protected $y = 0;
+    protected $y1 = 0;
 
     /**
-     * The Ellipse width
+     * Finish X coordinate.
+     *
      * @var integer
      */
-    protected $width = 0;
+    protected $x2 = 0;
 
     /**
-     * The Ellipse height
+     * Finish Y coordinate
+     *
      * @var integer
      */
-    protected $height = 0;
+    protected $y2 = 0;
 
     /**
-     * Line thickness
+     * Rectangle thickness.
+     *
      * @var integer
      */
     protected $thickness = 1;
 
     /**
-     * Line color.
+     * Hex color.
+     *
+     * @var string
      */
-    protected $color = 90;
+    protected $color = '';
 
     /**
      * Fill.
+     *
+     * @var string/object hex or sfImage object
      */
     protected $fill = null;
 
     /**
      * Line style.
+     *
+     * @var integer
      */
     protected $style = null;
 
     /**
-     * Construct an Ellipse object.
+     * Construct an sfImageBlur object.
      *
      * @param integer
      * @param integer
@@ -82,15 +93,15 @@ class Ellipse extends \ImageTransform\Transform
      * @param integer
      * @param integer
      * @param integer
-     * @param integer
+     * @param string/object hex or sfImage object
      * @param integer
      */
-    public function __construct($x, $y, $width, $height, $thickness = 1, $color = '#000000', $fill = null, $style = null)
+    public function __construct($x1, $y1, $x2, $y2, $thickness = 1, $color = null, $fill = null, $style = null)
     {
-        $this->setX($x);
-        $this->setY($y);
-        $this->setWidth($width);
-        $this->setHeight($height);
+        $this->setStartX($x1);
+        $this->setStartY($y1);
+        $this->setEndX($x2);
+        $this->setEndY($y2);
         $this->setThickness($thickness);
         $this->setColor($color);
         $this->setFill($fill);
@@ -98,16 +109,16 @@ class Ellipse extends \ImageTransform\Transform
     }
 
     /**
-     * Sets the X coordinate
+     * Sets the start X coordinate
      *
      * @param integer
      * @return boolean
      */
-    public function setX($x)
+    public function setStartX($x)
     {
         if (is_numeric($x))
         {
-            $this->x = (int) $x;
+            $this->x1 = (int) $x;
 
             return true;
         }
@@ -116,26 +127,26 @@ class Ellipse extends \ImageTransform\Transform
     }
 
     /**
-     * Gets the X coordinate
+     * Gets the start X coordinate
      *
      * @return integer
      */
-    public function getX()
+    public function getStartX()
     {
-        return $this->x;
+        return $this->x1;
     }
 
     /**
-     * Sets the Y coordinate
+     * Sets the start Y coordinate
      *
      * @param integer
      * @return boolean
      */
-    public function setY($y)
+    public function setStartY($y)
     {
         if (is_numeric($y))
         {
-            $this->y = (int) $y;
+            $this->y1 = (int) $y;
 
             return true;
         }
@@ -148,22 +159,22 @@ class Ellipse extends \ImageTransform\Transform
      *
      * @return integer
      */
-    public function getY()
+    public function getStartY()
     {
-        return $this->y;
+        return $this->y1;
     }
 
     /**
-     * Sets the width
+     * Sets the end X coordinate
      *
      * @param integer
      * @return boolean
      */
-    public function setWidth($width)
+    public function setEndX($x)
     {
-        if (is_numeric($width))
+        if (is_numeric($x))
         {
-            $this->width = (int) $width;
+            $this->x2 = (int) $x;
 
             return true;
         }
@@ -172,26 +183,26 @@ class Ellipse extends \ImageTransform\Transform
     }
 
     /**
-     * Gets the Width
+     * Gets the end X coordinate
      *
      * @return integer
      */
-    public function getWidth()
+    public function getEndX()
     {
-        return $this->width;
+        return $this->x2;
     }
 
     /**
-     * Sets the height
+     * Sets the end Y coordinate
      *
      * @param integer
      * @return boolean
      */
-    public function setHeight($height)
+    public function setEndY($y)
     {
-        if (is_numeric($height))
+        if (is_numeric($y))
         {
-            $this->height = (int) $height;
+            $this->y2 = (int) $y;
 
             return true;
         }
@@ -200,13 +211,13 @@ class Ellipse extends \ImageTransform\Transform
     }
 
     /**
-     * Gets the height
+     * Gets the end Y coordinate
      *
      * @return integer
      */
-    public function getHeight()
+    public function getEndY()
     {
-        return $this->height;
+        return $this->y2;
     }
 
     /**
@@ -248,10 +259,8 @@ class Ellipse extends \ImageTransform\Transform
         if (preg_match('/#[\d\w]{6}/', $color))
         {
             $this->color = $color;
-
             return true;
         }
-
         return false;
     }
 
@@ -273,13 +282,11 @@ class Ellipse extends \ImageTransform\Transform
      */
     public function setFill($fill)
     {
-        if (preg_match('/#[\d\w]{6}/', $fill) || ($fill instanceof \ImageTransform\Image))
+        if (preg_match('/#[\d\w]{6}/', $fill) || (is_object($fill) && class_name($fill) === 'sfImage'))
         {
             $this->fill = $fill;
-
             return true;
         }
-
         return false;
     }
 
@@ -304,6 +311,7 @@ class Ellipse extends \ImageTransform\Transform
         if (is_numeric($style))
         {
             $this->style = (int) $style;
+            $this->color = IMG_COLOR_STYLED;
 
             return true;
         }
@@ -322,7 +330,7 @@ class Ellipse extends \ImageTransform\Transform
     }
 
     /**
-     * Apply the transform to the \ImageTransform\Image object.
+     * Apply the transform to the sfImage object.
      *
      * @param sfImage
      * @return sfImage
@@ -330,29 +338,35 @@ class Ellipse extends \ImageTransform\Transform
     protected function transform(sfImage $image)
     {
         $resource = $image->getAdapter()->getHolder();
+
+        if (!is_null($this->style))
+        {
+            imagesetstyle($resource, $this->style);
+        }
+
         imagesetthickness($resource, $this->thickness);
 
         if (!is_null($this->fill))
         {
             if (!is_object($this->fill))
             {
-                imagefilledellipse($resource, $this->x, $this->y, $this->width, $this->height, $image->getAdapter()->getColorByHex($resource, $this->fill));
+                imagefilledrectangle($resource, $this->x1, $this->y1, $this->x2, $this->y2, $image->getAdapter()->getColorByHex($resource, $this->fill));
+            }
+
+            if ($this->getColor() !== "" && $this->fill !== $this->getColor())
+            {
+                imagerectangle($resource, $this->x1, $this->y1, $this->x2, $this->y2, $image->getAdapter()->getColorByHex($resource, $this->getColor()));
             }
 
             if (is_object($this->fill))
             {
-                imagefilledellipse($resource, $this->x, $this->y, $this->width, $this->height, $image->getAdapter()->getColorByHex($resource, $this->color));
-                $image->fill($this->x, $this->y, $this->fill);
-            }
-
-            if ($this->color !== "" && $this->fill !== $this->color)
-            {
-                imageellipse($resource, $this->x, $this->y, $this->width, $this->height, $image->getAdapter()->getColorByHex($resource, $this->color));
+                $image->fill($this->x1 + $this->thickness, $this->y1 + $this->thickness, $this->fill);
             }
         }
         else
         {
-            imageellipse($resource, $this->x, $this->y, $this->width, $this->height, $image->getAdapter()->getColorByHex($resource, $this->color));
+
+            imagerectangle($resource, $this->x1, $this->y1, $this->x2, $this->y2, $image->getAdapter()->getColorByHex($resource, $this->getColor()));
         }
 
         return $image;

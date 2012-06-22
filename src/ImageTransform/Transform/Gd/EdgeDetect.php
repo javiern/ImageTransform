@@ -20,6 +20,7 @@ namespace ImageTransform\Transform\Gd;
  *
  * @package ImageTransform
  * @subpackage transforms
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra
  */
 class EdgeDetect extends \ImageTransform\Transform

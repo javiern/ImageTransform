@@ -29,6 +29,8 @@ namespace ImageTransform\Transform\Generic;
  *
  * @package ImageTransform
  * @subpackage transforms
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
+ * @author Miloslav Kmet <miloslav.kmet@gmail.com>
  * @author Javier Neyra
  */
 class Thumbnail extends \ImageTransform\Transform

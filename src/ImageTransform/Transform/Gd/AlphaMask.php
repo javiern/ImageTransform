@@ -18,6 +18,7 @@ namespace ImageTransform\Transform\Gd;
  *
  * @package    ImageTransform\Transform\Gd
  * @subpackage transforms
+ * @author     Christian Schaefer <caefer@ical.ly>
  * @author     Javier Neyra
  */
 class AlphaMask extends \ImageTransform\Transform

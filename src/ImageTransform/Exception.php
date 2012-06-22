@@ -4,7 +4,7 @@
  * This file is part of the Image Transform Library.
  * (c) 2012 Javier Neyra 
  * 
- * Based on sfImageTransform from Stuart Lowes <stuart.lowes@gmail.com> * 
+ * Based on sfImageTransform from Stuart Lowes <stuart.lowes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,9 +13,10 @@
 namespace ImageTransform;
 
 /**
- * sfImageTransformException is thrown when an fatal error occurs while manipulating a image.
+ * \ImageTransform\Exception is thrown when an fatal error occurs while manipulating a image.
  *
  * @package  ImageTransform 
+ * @author   Stuart Lowes <stuart.lowes@gmail.com>
  * @author   Javier Neyra 
  */
 class Exception extends \Exception

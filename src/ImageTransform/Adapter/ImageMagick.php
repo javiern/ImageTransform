@@ -19,7 +19,8 @@ namespace ImageTransform\Adapter;
  * ImageMagick support for ImageTransform.
  *
  *
- * @package sfImageTransform
+ * @package ImageTransform
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra
  */
 class ImageMagick extends \ImageTransform\Adapter
@@ -167,7 +168,7 @@ class ImageMagick extends \ImageTransform\Adapter
     /**
      * Returns a copy of the adapter object
      *
-     * @return sfImage
+     * @return \ImageTransform\Image
      */
     public function copy()
     {

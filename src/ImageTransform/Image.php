@@ -4,7 +4,7 @@
  * This file is part of the Image Transform Library.
  * (c) 2012 Javier Neyra 
  * 
- * Based on sfImageTransform from Stuart Lowes <stuart.lowes@gmail.com> * 
+ * Based on sfImageTransform from Stuart Lowes <stuart.lowes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,28 +20,10 @@ namespace ImageTransform;
  *
  * This class allows the manipulation of Image using sub classes of the abstract ImageTranform class.
  *
- * Example 1 Chaining
- *
- * <code>
- * <?php
- * $img = new Image('image1.jpg', 'image/png', 'GD');
- * @todo review this
- * $response = $this->getResponse();
- * $response->setContentType($img->getMIMEType());
- * $response->setContent($img->resize(1000,null)->overlay(sfImage('logo.png','','')));
- * ?>
- * </code>
- *
- * Example 2 Standalone
- * 
- * <code>
- * $img = new sfImage('image1.jpg', 'image/jpg', 'ImageMagick');
- * $t = new sfImageScale(0.5);
- * $img = $t->execute($img);
- * $img->save('image2.jpg', 'image/jpg');
- * </code>
+ * More information in README.md
  *
  * @package ImageTransform
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra 
  *
  */
@@ -52,7 +34,7 @@ class Image
      * The adapter class.
      * 
      * @access protected
-     * @var object
+     * @var \ImageTransform\Adapter
      */
     protected $adapter;
 
@@ -97,8 +79,7 @@ class Image
     /**
      * Gets the image library adapter object
      * 
-     * @access public
-     * @param object
+     * @access public     
      */
     public function getAdapter()
     {
@@ -109,7 +90,7 @@ class Image
      * Sets the adapter to be used, i.e. GD or ImageMagick
      *
      * @access public
-     * @param object $adapter Instance of adapter object to be used
+     * @param \ImageTransform\Adapter $adapter Instance of adapter object to be used
      */
     public function setAdapter($adapter)
     {
@@ -243,7 +224,7 @@ class Image
      * @access public
      * @param string Filename
      * @param string MIME type
-     * @return sfImage
+     * @return \ImageTransform\Image
      */
     public function saveAs($filename, $mime = '')
     {
@@ -269,7 +250,7 @@ class Image
      * Returns a copy of the sfImage object
      *
      * @access public
-     * @return sfImage
+     * @return \ImageTransform\Image
      */
     public function copy()
     {
@@ -306,10 +287,10 @@ class Image
     /**
      * Magic method. This allows the calling of execute tranform methods on ImageTranform objects.
      *
-     * @method 
-     * @param string $name the name of the transform, sfImage<NAME>
+     *  
+     * @param string $name the name of the transform, \ImageTransform\Transform\<ADAPTER>\<NAME>
      * @param array Arguments for the transform class execute method
-     * @return sfImage
+     * @return \ImageTransform\Image
      */
     public function __call($name, $arguments)
     {

@@ -18,21 +18,23 @@ namespace ImageTransform;
  *
  * Abstract class.
  *
- * Abstract class all sfImageTranform transform classes are extended from.
+ * All transform classes must extend this one
  *
  * @abstract
  * @package ImageTransform
  * @subpackage Transforms 
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
+ * @author Miloslav Kmet <miloslav.kmet@gmail.com>
  * @author Javier Neyra 
  */
 abstract class Transform
 {
 
     /**
-     * Apply the transform to the sfImage object.
+     * Apply the transform to the \ImageTransform\Image object.
      *
-     * @param sfImage
-     * @return sfImage
+     * @param \ImageTransform\Image
+     * @return \ImageTransform\Image
      */
     public function execute(Image $image)
     {
@@ -48,9 +50,8 @@ abstract class Transform
     /**
      * Abstract method that performs the image manipulation.
      *
-     * @param sfImage
-     * @ignore
-     * @return sfImage
+     * @param \ImageTransform\Image
+     * @return \ImageTransform\Image
      */
     abstract protected function transform(Image $image);
 }

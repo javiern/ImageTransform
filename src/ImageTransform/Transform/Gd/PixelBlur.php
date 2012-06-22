@@ -1,11 +1,16 @@
 <?php
-/*
- * This file is part of the sfImageTransform package.
- * (c) 2007 Stuart Lowes <stuart.lowes@gmail.com>
+
+/**
+ * This file is part of the Image Transform Library.
+ * (c) 2012 Javier Neyra 
+ * 
+ * Based on sfImageTransform from Stuart Lowes <stuart.lowes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace ImageTransform\Transform\Gd;
 
 /**
  *
@@ -20,7 +25,7 @@
  * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @version SVN: $Id$
  */
-class sfImagePixelBlurGD extends sfImageTransformAbstract
+class PixelBlur extends \ImageTransform\Transform
 {
   /**
    * The number of pixels used for the blur.
