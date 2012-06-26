@@ -14,23 +14,23 @@ namespace ImageTransform\Transform\Gd;
 
 /**
  *
- * GaussianBlur class.
+ * Sketchy class.
  *
- * Blurs the image using the Gaussian method.
+ * Embosses the image.
  *
  * @package ImageTransform
  * @subpackage transforms
  * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra
  */
-class GaussianBlur extends \ImageTransform\Transform
+class Sketchy extends \ImageTransform\Transform
 {
 
     /**
-     * Apply the transform to the \ImageTransform\Image object.
+     * Apply the transform to the sfImage object.
      *
-     * @param \ImageTransform\Image
-     * @return \ImageTransform\Image
+     * @param sfImage
+     * @return sfImage
      */
     protected function transform(\ImageTransform\Image $image)
     {
@@ -38,11 +38,11 @@ class GaussianBlur extends \ImageTransform\Transform
 
         if (function_exists('imagefilter'))
         {
-            imagefilter($resource, IMG_FILTER_GAUSSIAN_BLUR);
+            imagefilter($resource, IMG_FILTER_MEAN_REMOVAL);
         }
         else
         {
-            throw new \ImageTransform\Image(sprintf('Cannot perform transform, GD does not support imagefilter '));
+            throw new \ImageTransform\Exception(sprintf('Cannot perform transform, GD does not support imagefilter '));
         }
 
         return $image;

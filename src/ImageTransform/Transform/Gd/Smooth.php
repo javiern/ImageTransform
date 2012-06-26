@@ -14,44 +14,46 @@ namespace ImageTransform\Transform\Gd;
 
 /**
  *
- * Brightness class.
+ * Smooth class.
  *
- * Sets the brightness of a GD image.
+ * Greyscales an image.
  *
- * @package \ImageTransform\Image
+ * Reduces the level of detail of an image.
+ *
+ * @package ImageTransform
  * @subpackage transforms
  * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra
  */
-class Brightness extends \imageTransform\Transform
+class Smooth extends \ImageTransform\Transform
 {
 
     /**
-     * Constract level to be applied.
+     * Smoothness level to be applied.
      */
-    protected $brightness = 0;
+    protected $smoothness = 0;
 
     /**
-     * Construct an Brightness object.
+     * Construct an sfImageSmooth object.
      *
      * @param integer
      */
-    public function __construct($brightness)
+    public function __construct($smoothness = 0)
     {
-        $this->setBrightness($brightness);
+        $this->setSmoothness($smoothness);
     }
 
     /**
-     * Sets the brightness
+     * Sets the smoothness
      *
      * @param integer
      * @return boolean
      */
-    public function setBrightness($brightness)
+    public function setSmoothness($smoothness)
     {
-        if (is_numeric($brightness))
+        if (is_numeric($smoothness))
         {
-            $this->brightness = (int) $brightness;
+            $this->smoothness = (int) $smoothness;
 
             return true;
         }
@@ -60,21 +62,20 @@ class Brightness extends \imageTransform\Transform
     }
 
     /**
-     * Gets the brightness
+     * Gets the smoothness
      *
      * @return integer
      */
-    public function getBrightness()
+    public function getSmoothness()
     {
-        return $this->brightness;
+        return $this->smoothness;
     }
 
     /**
-     * Apply the transform to the \ImageTransform\Image object.
+     * Apply the transform to the sfImage object.
      *
-     * @access protected
-     * @param \ImageTransform\Image
-     * @return \ImageTransform\Image
+     * @param sfImage
+     * @return sfImage
      */
     protected function transform(\ImageTransform\Image $image)
     {
@@ -82,11 +83,11 @@ class Brightness extends \imageTransform\Transform
 
         if (function_exists('imagefilter'))
         {
-            imagefilter($resource, IMG_FILTER_BRIGHTNESS, $this->brightness);
+            imagefilter($resource, IMG_FILTER_SMOOTH, $this->smoothness);
         }
         else
         {
-            throw new \ImageTransform\Exception(sprintf('Cannot perform transform, GD does not support imagefilter '));
+            throw new sfImageTransformException(sprintf('Cannot perform transform, GD does not support imagefilter '));
         }
 
         return $image;

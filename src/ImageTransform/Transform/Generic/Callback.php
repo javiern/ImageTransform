@@ -13,7 +13,7 @@
 namespace ImageTransform\Transform\Generic;
 
 /**
- * sfImageCallbackGeneric class
+ * Callback class
  *
  * Callback transform
  *
@@ -21,6 +21,7 @@ namespace ImageTransform\Transform\Generic;
  *
  * @package sfImageTransform
  * @subpackage transforms
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra 
  */
 class Callback extends \ImageTransform\Transform {
@@ -95,7 +96,7 @@ class Callback extends \ImageTransform\Transform {
 
     /**
      *
-     * @param Image $image
+     * @param \Imagetransform\Image $image
      * @return Image
      */
     public function transform(\ImageTransform\Image $image) {

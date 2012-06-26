@@ -19,6 +19,9 @@ namespace ImageTransform\Transform\Generic;
  *
  * @package ImageTransform
  * @subpackage transforms
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
+ * @author Miloslav Kmet <miloslav.kmet@gmail.com>
+ * @author Victor Berchet <vberchet-sf@yahoo.com>
  * @author Javier Neyra
  */
 class Resize extends \ImageTransform\Transform
@@ -174,7 +177,7 @@ class Resize extends \ImageTransform\Transform
   /**
    * Apply the transformation to the image and returns the resized image
    */
-  protected function transform(sfImage $image)
+  protected function transform(\ImageTransform\Image $image)
   {
     list($target_w, $target_h) = $this->computeTargetSize($image->getWidth(), $image->getHeight());
     

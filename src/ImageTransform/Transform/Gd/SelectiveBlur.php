@@ -14,20 +14,20 @@ namespace ImageTransform\Transform\Gd;
 
 /**
  *
- * GaussianBlur class.
+ * sfImageSelectureBlurGD class.
  *
  * Blurs the image using the Gaussian method.
  *
- * @package ImageTransform
+ * @package sfImageTransform
  * @subpackage transforms
  * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra
  */
-class GaussianBlur extends \ImageTransform\Transform
+class SelectiveBlur extends \ImageTransform\Image
 {
 
     /**
-     * Apply the transform to the \ImageTransform\Image object.
+     * Apply the transform to the sfImage object.
      *
      * @param \ImageTransform\Image
      * @return \ImageTransform\Image
@@ -38,11 +38,11 @@ class GaussianBlur extends \ImageTransform\Transform
 
         if (function_exists('imagefilter'))
         {
-            imagefilter($resource, IMG_FILTER_GAUSSIAN_BLUR);
+            imagefilter($resource, IMG_FILTER_SELECTIVE_BLUR);
         }
         else
         {
-            throw new \ImageTransform\Image(sprintf('Cannot perform transform, GD does not support imagefilter '));
+            throw new \ImageTransform\Exception(sprintf('Cannot perform transform, GD does not support imagefilter '));
         }
 
         return $image;

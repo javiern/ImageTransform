@@ -14,26 +14,25 @@ namespace ImageTransform\Transform\Gd;
 
 /**
  *
- * Flip class.
+ * Mirror class.
  *
- * Flips image.
+ * Mirrors a GD image.
  *
- * Flips the image vertically.
+ * Creates a mirror image of the original image.
  *
- * @package ImageTransform
+ * @package sfImageTransform
  * @subpackage transforms
- * @author Javier Neyra
  * @author Stuart Lowes <stuart.lowes@gmail.com>
- * @version SVN: $Id$
+ * @author Javier Neyra
  */
-class Flip extends \ImageTransform\Image
+class Mirror extends \ImageTransform\Transform
 {
 
     /**
-     * Apply the transform to the \ImageTransfor\Image object.
+     * Apply the transform to the sfImage object.
      *
      * @param integer
-     * @return \ImageTransform\Image
+     * @return sfImage
      */
     protected function transform(\ImageTransform\Image $image)
     {
@@ -42,12 +41,16 @@ class Flip extends \ImageTransform\Image
         $x = imagesx($resource);
         $y = imagesy($resource);
 
-        $dest_resource = $image->getAdapter()->getTransparentImage($x, $y);
+        imagealphablending($resource, true);
 
-        for ($h = 0; $h < $y; $h++)
+        $dest_resource = $image->getAdapter()->getTransparentImage($x, $y);
+        imagealphablending($dest_resource, true);
+
+        for ($w = 0; $w < $x; $w++)
         {
-            imagecopy($dest_resource, $resource, 0, $h, 0, $y - $h - 1, $x, 1);
+            imagecopy($dest_resource, $resource, $w, 0, $x - $w - 1, 0, 1, $y);
         }
+
         // Tidy up
         imagedestroy($resource);
 

@@ -18,6 +18,7 @@ namespace ImageTransform\Adapter;
  *
  * @package ImageTransform
  * @subpackage Adapters
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra
  */
 class Gd extends \ImageTransform\Adapter
@@ -70,7 +71,7 @@ class Gd extends \ImageTransform\Adapter
     /**
      * Initialize the object. Check for GD extension. An exception is thrown if not installed
      *
-     * @throws sfImageTransformException
+     * @throws \ImageTransform\Exception
      */
     public function __construct()
     {
@@ -197,7 +198,7 @@ class Gd extends \ImageTransform\Adapter
     /**
      * Returns a copy of the adapter object
      *
-     * @return sfImage
+     * @return \ImageTransform\Image
      */
     public function copy()
     {
@@ -375,7 +376,7 @@ class Gd extends \ImageTransform\Adapter
      * Returns image in current format and optionally writes image to disk
      * 
      * @return resource
-     * @throws sfImageTransformException
+     * @throws \ImageTransform\Exception
      */
     protected function __output($to_file = false, $filename = '')
     {
@@ -456,7 +457,7 @@ class Gd extends \ImageTransform\Adapter
      * @param integer width
      * @param integer height
      * @return resource image
-     * @throws sfImageTransformException
+     * @throws \ImageTransform\Exception
      */
     public function getTransparentImage($w, $h)
     {

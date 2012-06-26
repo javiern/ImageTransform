@@ -18,6 +18,7 @@ namespace ImageTransform\Transform\Gd;
  *
  * @package    ImageTransform\Transform\Gd
  * @subpackage transforms
+ * @author     Christian Schaefer <caefer@ical.ly>
  * @author     Javier Neyra
  */
 class AlphaMask extends \ImageTransform\Transform
@@ -37,7 +38,7 @@ class AlphaMask extends \ImageTransform\Transform
      */
     protected $color = false;
 
-    public function __construct($mask, $color = '#000000')
+    public function __construct($mask, $color = '#FFFFFF')
     {
         $this->setMask($mask);
         $this->setColor($color);

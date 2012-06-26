@@ -29,6 +29,8 @@ namespace ImageTransform\Transform\Generic;
  *
  * @package ImageTransform
  * @subpackage transforms
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
+ * @author Miloslav Kmet <miloslav.kmet@gmail.com>
  * @author Javier Neyra
  */
 class Thumbnail extends \ImageTransform\Transform
@@ -184,7 +186,7 @@ class Thumbnail extends \ImageTransform\Transform
     /**
      * Apply the transformation to the image and returns the image thumbnail
      */
-    protected function transform(sfImage $image)
+    protected function transform(\ImageTransform\Image $image)
     {
         $resource_w = $image->getWidth();
         $resource_h = $image->getHeight();

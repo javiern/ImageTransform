@@ -14,102 +14,94 @@ namespace ImageTransform\Transform\Gd;
 
 /**
  *
- * sfImageArcGD class.
+ * sfImageRectangleGD class.
  *
- * Draws an arc.
+ * Draws a rectangle.
  *
- * Draws an arc on an GD image.
+ * Draws a rectangle on a GD image.
  *
- * @package ImageTransform
+ * @package sfImageTransform
  * @subpackage transforms
  * @author Stuart Lowes <stuart.lowes@gmail.com>
- * @author Javier neyra
+ * @author Javier Neyra
  */
-class Arc extends \ImageTransform\Transform
+class Rectangle extends \ImageTransform\Transform
 {
 
     /**
-     * X-coordinate of the center.
+     * Start X coordinate.
+     *
      * @var integer
      */
-    protected $x = 0;
+    protected $x1 = 0;
 
     /**
-     * Y-coordinate of the center.
+     * Start Y coordinate.
+     *
      * @var integer
      */
-    protected $y = 0;
+    protected $y1 = 0;
 
     /**
-     * The arc width
+     * Finish X coordinate.
+     *
      * @var integer
      */
-    protected $width = 0;
+    protected $x2 = 0;
 
     /**
-     * The arc height
+     * Finish Y coordinate
+     *
      * @var integer
      */
-    protected $height = 0;
+    protected $y2 = 0;
 
     /**
-     * Line thickness
+     * Rectangle thickness.
+     *
      * @var integer
      */
-    protected $thickness = 0;
+    protected $thickness = 1;
 
     /**
-     * The arc start angle, in degrees.
-     * @var integer
+     * Hex color.
+     *
+     * @var string
      */
-    protected $start_angle = 0;
-
-    /**
-     * The arc end angle, in degrees.
-     * @var integer
-     */
-    protected $end_angle = 90;
-
-    /**
-     * Line color.
-     * @var string hex
-     */
-    protected $color = '#000000';
+    protected $color = '';
 
     /**
      * Fill.
-     * @var string/sfImage hex color or sfImage
+     *
+     * @var string/object hex or sfImage object
      */
     protected $fill = null;
 
     /**
      * Line style.
+     *
      * @var integer
      */
     protected $style = null;
 
     /**
-     * Construct an sfImageArc object.
+     * Construct an sfImageBlur object.
      *
-     * @param integer $x x coordinate
-     * @param integer $y y coordinate
-     * @param integer $width width of arc
-     * @param integer $height height of arc
-     * @param integer $start_angle angle in degrees
-     * @param integer $end_angle angle in degrees
-     * @param integer $thickness line thickness
-     * @param string  $color hex color of line
-     * @param string/object $fill string color or fill object
-     * @param integer $style fill style, only applicable if using a fill object
+     * @param integer
+     * @param integer
+     * @param integer
+     * @param integer
+     * @param integer
+     * @param integer
+     * @param string/object hex or sfImage object
+     * @param integer
      */
-    public function __construct($x, $y, $width, $height, $start_angle, $end_angle, $thickness = 1, $color = '#000000', $fill = null, $style = null)
+    public function __construct($x1, $y1, $x2, $y2, $thickness = 1, $color = null, $fill = null, $style = null)
     {
-        $this->setX($x);
-        $this->setY($y);
-        $this->setWidth($width);
-        $this->setHeight($height);
-        $this->setStartAngle($start_angle);
-        $this->setEndAngle($end_angle);
+        $this->setStartX($x1);
+        $this->setStartY($y1);
+        $this->setEndX($x2);
+        $this->setEndY($y2);
         $this->setThickness($thickness);
         $this->setColor($color);
         $this->setFill($fill);
@@ -117,16 +109,16 @@ class Arc extends \ImageTransform\Transform
     }
 
     /**
-     * Sets the X coordinate
+     * Sets the start X coordinate
      *
      * @param integer
      * @return boolean
      */
-    public function setX($x)
+    public function setStartX($x)
     {
         if (is_numeric($x))
         {
-            $this->x = (int) $x;
+            $this->x1 = (int) $x;
 
             return true;
         }
@@ -135,26 +127,26 @@ class Arc extends \ImageTransform\Transform
     }
 
     /**
-     * Gets the X coordinate
+     * Gets the start X coordinate
      *
      * @return integer
      */
-    public function getX()
+    public function getStartX()
     {
-        return $this->x;
+        return $this->x1;
     }
 
     /**
-     * Sets the Y coordinate
+     * Sets the start Y coordinate
      *
      * @param integer
      * @return boolean
      */
-    public function setY($y)
+    public function setStartY($y)
     {
         if (is_numeric($y))
         {
-            $this->y = (int) $y;
+            $this->y1 = (int) $y;
 
             return true;
         }
@@ -167,22 +159,22 @@ class Arc extends \ImageTransform\Transform
      *
      * @return integer
      */
-    public function getY()
+    public function getStartY()
     {
-        return $this->y;
+        return $this->y1;
     }
 
     /**
-     * Sets the width
+     * Sets the end X coordinate
      *
      * @param integer
      * @return boolean
      */
-    public function setWidth($width)
+    public function setEndX($x)
     {
-        if (is_numeric($width))
+        if (is_numeric($x))
         {
-            $this->width = (int) $width;
+            $this->x2 = (int) $x;
 
             return true;
         }
@@ -191,26 +183,26 @@ class Arc extends \ImageTransform\Transform
     }
 
     /**
-     * Gets the Width
+     * Gets the end X coordinate
      *
      * @return integer
      */
-    public function getWidth()
+    public function getEndX()
     {
-        return $this->width;
+        return $this->x2;
     }
 
     /**
-     * Sets the height
+     * Sets the end Y coordinate
      *
      * @param integer
      * @return boolean
      */
-    public function setHeight($height)
+    public function setEndY($y)
     {
-        if (is_numeric($height))
+        if (is_numeric($y))
         {
-            $this->height = (int) $height;
+            $this->y2 = (int) $y;
 
             return true;
         }
@@ -219,69 +211,13 @@ class Arc extends \ImageTransform\Transform
     }
 
     /**
-     * Gets the height
+     * Gets the end Y coordinate
      *
      * @return integer
      */
-    public function getHeight()
+    public function getEndY()
     {
-        return $this->height;
-    }
-
-    /**
-     * Sets the start angel
-     *
-     * @param integer
-     * @return boolean
-     */
-    public function setStartAngle($start_angle)
-    {
-        if (is_numeric($start_angle))
-        {
-            $this->start_angle = (int) $start_angle;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Gets the start angel
-     *
-     * @return integer
-     */
-    public function getStartAngle()
-    {
-        return $this->start_angle;
-    }
-
-    /**
-     * Sets the end angel
-     *
-     * @param integer
-     * @return boolean
-     */
-    public function setEndAngle($end_angle)
-    {
-        if (is_numeric($end_angle))
-        {
-            $this->end_angle = (int) $end_angle;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Gets the end angel
-     *
-     * @return integer
-     */
-    public function getEndAngle()
-    {
-        return $this->end_angle;
+        return $this->y2;
     }
 
     /**
@@ -295,6 +231,7 @@ class Arc extends \ImageTransform\Transform
         if (is_numeric($thickness))
         {
             $this->thickness = (int) $thickness;
+
             return true;
         }
 
@@ -348,10 +285,8 @@ class Arc extends \ImageTransform\Transform
         if (preg_match('/#[\d\w]{6}/', $fill) || (is_object($fill) && class_name($fill) === 'sfImage'))
         {
             $this->fill = $fill;
-
             return true;
         }
-
         return false;
     }
 
@@ -376,6 +311,7 @@ class Arc extends \ImageTransform\Transform
         if (is_numeric($style))
         {
             $this->style = (int) $style;
+            $this->color = IMG_COLOR_STYLED;
 
             return true;
         }
@@ -396,12 +332,17 @@ class Arc extends \ImageTransform\Transform
     /**
      * Apply the transform to the sfImage object.
      *
-     * @param object
-     * @return object
+     * @param sfImage
+     * @return sfImage
      */
     protected function transform(\ImageTransform\Image $image)
     {
         $resource = $image->getAdapter()->getHolder();
+
+        if (!is_null($this->style))
+        {
+            imagesetstyle($resource, $this->style);
+        }
 
         imagesetthickness($resource, $this->thickness);
 
@@ -409,18 +350,23 @@ class Arc extends \ImageTransform\Transform
         {
             if (!is_object($this->fill))
             {
-                imagefilledarc($resource, $this->x, $this->y, $this->width, $this->height, $this->start_angle, $this->end_angle, $image->getAdapter()->getColorByHex($resource, $this->fill), $this->style);
+                imagefilledrectangle($resource, $this->x1, $this->y1, $this->x2, $this->y2, $image->getAdapter()->getColorByHex($resource, $this->fill));
             }
 
-            if ($this->color !== "" && $this->fill !== $this->color)
+            if ($this->getColor() !== "" && $this->fill !== $this->getColor())
             {
-                imagearc($resource, $this->x, $this->y, $this->width, $this->height, $this->start_angle, $this->end_angle, $image->getAdapter()->getColorByHex($resource, $this->color));
+                imagerectangle($resource, $this->x1, $this->y1, $this->x2, $this->y2, $image->getAdapter()->getColorByHex($resource, $this->getColor()));
+            }
+
+            if (is_object($this->fill))
+            {
+                $image->fill($this->x1 + $this->thickness, $this->y1 + $this->thickness, $this->fill);
             }
         }
         else
         {
 
-            imagearc($resource, $this->x, $this->y, $this->width, $this->height, $this->start_angle, $this->end_angle, $image->getAdapter()->getColorByHex($resource, $this->color));
+            imagerectangle($resource, $this->x1, $this->y1, $this->x2, $this->y2, $image->getAdapter()->getColorByHex($resource, $this->getColor()));
         }
 
         return $image;

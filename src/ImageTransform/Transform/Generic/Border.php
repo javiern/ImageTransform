@@ -19,6 +19,7 @@ namespace ImageTransform\Transform\Generic;
  * 
  * @package ImageTransform
  * @subpackage Transforms
+ * @author Stuart Lowes <stuart.lowes@gmail.com>
  * @author Javier Neyra 
  */
 class Border extends \ImageTransform\Transform
